@@ -4,23 +4,12 @@ class myPlugin {
 	}
 
 	apply (compiler) {
-	    compiler.plugin('compilation', this.injectScriptToBundle.bind(this))
-	    compiler.plugin('done', this.onBuildCompleted.bind(this))
+		console.log(compiler)
+	    compiler.plugin('compilation', this.watchCompilation.bind(this))
 	}
 
-	injectScriptToBundle(compilation) {
-		compilation.mainTemplate('startup', source => {
-			return "\nconsole.log('Hello world!');\n" + source
-		})
-	}
-
-	onBuildCompleted(stats) {
-		const detail = stats.toJson({
-			errorDetails: false
-		})
-
-		this.sendWarnings(statsJson.warnings)
-		this.sendErrors(statsJson.errors)
+	watchCompilation(compilation) {
+		// console.log(compilation)
 	}
 }
 
